@@ -384,6 +384,12 @@
         [[UIApplication sharedApplication] openURL:request.URL];
         return NO;
     }
+	
+	// Handle email
+	if ([[[request URL] scheme] isEqual:@"mailto"]) {
+        [[UIApplication sharedApplication] openURL:[request URL]];
+        return NO;
+    }
     
     return YES;
 }
