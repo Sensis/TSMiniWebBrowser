@@ -373,11 +373,7 @@
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([[request.URL absoluteString] hasPrefix:@"sms:"]) {
-        [[UIApplication sharedApplication] openURL:request.URL];
-        return NO;
-    }
-    
+	 
     if ([[request.URL absoluteString] hasPrefix:@"http://www.youtube.com/v/"] ||
         [[request.URL absoluteString] hasPrefix:@"http://itunes.apple.com/"] ||
         [[request.URL absoluteString] hasPrefix:@"http://phobos.apple.com/"]) {
@@ -385,8 +381,11 @@
         return NO;
     }
 	
-	// Handle email
-	if ([[[request URL] scheme] isEqual:@"mailto"]) {
+	// Handle alternate URL schemes
+	if ([[[request URL] scheme] isEqual:@"mailto"] ||
+		[[[request URL] scheme] isEqual:@"callto"] ||
+		[[[request URL] scheme] isEqual:@"tel"] ||
+		[[[request URL] scheme] isEqual:@"sms"]) {
         [[UIApplication sharedApplication] openURL:[request URL]];
         return NO;
     }
