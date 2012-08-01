@@ -309,7 +309,11 @@
     NSString *urlString = @"";
     if (showURLStringOnActionSheetTitle) {
         NSURL* url = [webView.request URL];
-        urlString = [url absoluteString];
+		urlString = [url absoluteString];
+		if([[url absoluteString] length] > kTSMaxURLActionSheetLabelLength)
+		{
+			urlString = [NSString stringWithFormat:@"%@...",[[url absoluteString] substringToIndex:kTSMaxURLActionSheetLabelLength]];
+		}
     }
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:urlString
 															 delegate:self 

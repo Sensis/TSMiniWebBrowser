@@ -28,6 +28,7 @@
 
 #define kToolBarHeight  44
 #define kTabBarHeight   49
+#define kTSMaxURLActionSheetLabelLength 100
 
 @protocol TSMiniWebBrowserDelegate <NSObject>
 @optional
