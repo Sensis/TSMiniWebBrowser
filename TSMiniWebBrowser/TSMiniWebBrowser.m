@@ -375,9 +375,45 @@
 }
 
 #pragma mark - UIWebViewDelegate
+-(void)openYoutubeVideo:(NSURL *)url {
+	static NSString *htmlString =
+	@"<!doctype html>"
+	"<html style=\"height:100%%;\">"
+		"<head>"
+			"<meta name = \"viewport\" content = \"initial-scale = 1.0, user-scalable = no, width = %f\"/>"
+		"</head>"
+		"<body style=\"background-color:black; margin: 0; height:100%%\">"
+			"<div style=\"height:100%%; display:-webkit-box; -webkit-box-align:center;\">"
+				"<div style=\"margin:0 auto;\">"
+					"<object width=\"%f\">"
+						"<param name=\"movie\" value=\"%@\"></param>"
+						"<param name=\"wmode\" value=\"transparent\"></param>"
+						"<embed src=\"%@\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"%f\"></embed>"
+					"</object>"
+				"</div>"
+			"</div>"
+		"</body>"
+	"</html>";
+	
+	[webView loadHTMLString:[NSString stringWithFormat:htmlString,
+							 webView.frame.size.width,
+							 webView.frame.size.width,
+							 url,
+							 url,
+							 webView.frame.size.width]
+					baseURL:nil];
+}
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	 
+	NSLog(@"[request.URL absoluteString] = %@", [request.URL absoluteString]);
+	
+	if([[request.URL absoluteString] hasPrefix:@"http://www.youtube.com/v/"] ||
+	   [[request.URL absoluteString] hasPrefix:@"http://www.youtube.com/watch?v="]){
+		[self openYoutubeVideo:request.URL];
+		return NO;
+	}
+	
     if ([[request.URL absoluteString] hasPrefix:@"http://itunes.apple.com/"] ||
         [[request.URL absoluteString] hasPrefix:@"http://phobos.apple.com/"]) {
         [[UIApplication sharedApplication] openURL:request.URL];
