@@ -78,7 +78,9 @@
 //TSMiniWebBrowser can get deallocated while the page is still loading and the web view will call its delegate-- resulting in a crash
 -(void)dealloc
 {
-    [webView setDelegate:nil];
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[webView setDelegate:nil];
+	[webView stopLoading];
 }
 
 #pragma mark - Init
