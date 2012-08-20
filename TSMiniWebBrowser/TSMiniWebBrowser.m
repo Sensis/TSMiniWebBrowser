@@ -415,8 +415,8 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)_webView {
-	if ([self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidLoad)]) {
-		[self.delegate tsMiniWebBrowserDidLoad];
+	if ([self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidLoad:)]) {
+		[self.delegate tsMiniWebBrowserDidLoad:webView.request.URL];
 	}
     // Show page title on title bar?
     if (showPageTitleOnTitleBar) {
@@ -429,11 +429,7 @@
     [self toggleBackForwardButtons];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-	if ([self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidFailLoad)]) {
-		[self.delegate tsMiniWebBrowserDidFailLoad];
-	}
-	
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {	
     [self hideActivityIndicators];
 	
 	if ([error code] == NSURLErrorCancelled) return;

@@ -33,8 +33,7 @@
 @protocol TSMiniWebBrowserDelegate <NSObject>
 @optional
 -(void) tsMiniWebBrowserDidDismiss;
--(void) tsMiniWebBrowserDidLoad;
--(void) tsMiniWebBrowserDidFailLoad;
+-(void) tsMiniWebBrowserDidLoad:(NSURL *)url;
 @end
 
 typedef enum {
