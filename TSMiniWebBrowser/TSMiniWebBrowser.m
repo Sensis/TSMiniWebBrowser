@@ -69,7 +69,7 @@
     [self dismissModalViewControllerAnimated:YES];
     
     // Notify the delegate
-    if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidDismiss)]) {
+    if ([self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidDismiss)]) {
         [delegate tsMiniWebBrowserDidDismiss];
     }
 }
@@ -415,6 +415,9 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)_webView {
+	if ([self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidLoad)]) {
+		[self.delegate tsMiniWebBrowserDidLoad];
+	}
     // Show page title on title bar?
     if (showPageTitleOnTitleBar) {
         NSString *pageTitle = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
@@ -427,6 +430,10 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+	if ([self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidFailLoad)]) {
+		[self.delegate tsMiniWebBrowserDidFailLoad];
+	}
+	
     [self hideActivityIndicators];
 	
 	if ([error code] == NSURLErrorCancelled) return;
