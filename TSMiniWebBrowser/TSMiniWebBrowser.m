@@ -325,7 +325,8 @@
 	return @"Open in Safari";
 }
 
-- (void)showActionSheet {
+- (void)showActionSheet:(UIBarButtonItem *)button
+{
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[self actionSheetTitle]
 															 delegate:self 
                                                     cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
@@ -337,10 +338,11 @@
     if (mode == TSMiniWebBrowserModeTabBar) {
         [actionSheet showInView:self.tabBarController.view];
         
-    } else {
-        [actionSheet showInView:self.view];
     }
-    
+	else
+	{
+		[actionSheet showFromBarButtonItem:button animated:YES];
+    }
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -375,7 +377,7 @@
 }
 
 - (void)buttonActionTouchUp:(id)sender {
-    [self showActionSheet];
+    [self showActionSheet:sender];
 }
 
 #pragma mark - Public Methods
