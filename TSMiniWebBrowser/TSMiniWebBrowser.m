@@ -26,6 +26,10 @@
 
 #import "TSMiniWebBrowser.h"
 
+@interface TSMiniWebBrowser ()
+@property (nonatomic, retain) UIActionSheet* actionSheet;
+@end
+
 @implementation TSMiniWebBrowser
 
 @synthesize delegate;
@@ -327,22 +331,25 @@
 
 - (void)showActionSheet:(UIBarButtonItem *)button
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[self actionSheetTitle]
-															 delegate:self 
-                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                               destructiveButtonTitle:nil
-													otherButtonTitles:NSLocalizedString([self actionSheetButtonTitle], nil),  nil];
-    
-	actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    
-    if (mode == TSMiniWebBrowserModeTabBar) {
-        [actionSheet showInView:self.tabBarController.view];
-        
-    }
-	else
+	if (self.actionSheet == nil)
 	{
-		[actionSheet showFromBarButtonItem:button animated:YES];
-    }
+		self.actionSheet = [[UIActionSheet alloc] initWithTitle:[self actionSheetTitle]
+													   delegate:self
+											  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+										 destructiveButtonTitle:nil
+											  otherButtonTitles:NSLocalizedString([self actionSheetButtonTitle], nil),  nil];
+		
+		_actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+		
+		if (mode == TSMiniWebBrowserModeTabBar)
+		{
+			[_actionSheet showInView:self.tabBarController.view];
+		}
+		else
+		{
+			[_actionSheet showFromBarButtonItem:button animated:YES];
+		}
+	}
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -355,6 +362,12 @@
 			break;
 	}
 }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	self.actionSheet = nil;
+}
+
 
 #pragma mark - Actions
 
