@@ -28,6 +28,7 @@
 
 @interface TSMiniWebBrowser ()
 @property (nonatomic, retain) UIActionSheet* actionSheet;
+@property (nonatomic,copy) NSURL *urlToLoad;
 @end
 
 @implementation TSMiniWebBrowser
@@ -185,7 +186,7 @@
     webView.delegate = self;
     
     // Load the URL in the webView
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:urlToLoad];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:self.urlToLoad];
     [webView loadRequest:requestObj];
 }
 
@@ -195,7 +196,7 @@
     self = [self init];
     if(self)
     {
-        urlToLoad = url;
+        self.urlToLoad = url;
         
         // Defaults
         mode = TSMiniWebBrowserModeNavigation;
@@ -309,12 +310,21 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark Current url
+
+- (NSURL*)currentURL
+{
+	//If the webview fails to load the url is bogus. return self.urlToLoad
+	BOOL hasValidWebUrl = [[[webView.request URL] description] length] > 0;
+	return hasValidWebUrl ? [webView.request URL] : self.urlToLoad;
+}
+
 #pragma mark - Action Sheet
 
 -(NSString *)actionSheetTitle{
 	NSString *urlString = @"";
     if (showURLStringOnActionSheetTitle) {
-        NSURL* url = [webView.request URL];
+        NSURL* url = [self currentURL];
 		urlString = [url absoluteString];
 		if([[url absoluteString] length] > kTSMaxURLActionSheetLabelLength)
 		{
@@ -356,7 +366,7 @@
 	switch(buttonIndex) {
 		case 0:
 			// Open in Safari
-            [[UIApplication sharedApplication] openURL:[webView.request URL]];
+            [[UIApplication sharedApplication] openURL:[self currentURL]];
 			break;
 		default:
 			break;
@@ -404,8 +414,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	
-    if ([[request.URL absoluteString] hasPrefix:@"http://www.youtube.com/v/"] ||
-        [[request.URL absoluteString] hasPrefix:@"http://itunes.apple.com/"] ||
+    if ([[request.URL absoluteString] hasPrefix:@"http://itunes.apple.com/"] ||
         [[request.URL absoluteString] hasPrefix:@"http://phobos.apple.com/"]) {
         [[UIApplication sharedApplication] openURL:request.URL];
         return NO;
