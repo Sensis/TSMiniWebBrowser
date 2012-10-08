@@ -404,8 +404,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	
-    if ([[request.URL absoluteString] hasPrefix:@"http://www.youtube.com/v/"] ||
-        [[request.URL absoluteString] hasPrefix:@"http://itunes.apple.com/"] ||
+    if ([[request.URL absoluteString] hasPrefix:@"http://itunes.apple.com/"] ||
         [[request.URL absoluteString] hasPrefix:@"http://phobos.apple.com/"]) {
         [[UIApplication sharedApplication] openURL:request.URL];
         return NO;
