@@ -43,9 +43,7 @@ typedef enum {
 } TSMiniWebBrowserMode;
 
 @interface TSMiniWebBrowser : UIViewController <UIWebViewDelegate, UIActionSheetDelegate> {
-    // URL
-    NSURL *urlToLoad;
-    
+   
     // Layout
     UIWebView *webView;
     UIToolbar *toolBar;
