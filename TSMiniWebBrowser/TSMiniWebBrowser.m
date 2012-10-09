@@ -28,7 +28,6 @@
 
 @interface TSMiniWebBrowser ()
 @property (nonatomic, retain) UIActionSheet* actionSheet;
-@property (nonatomic,copy) NSURL *urlToLoad;
 @end
 
 @implementation TSMiniWebBrowser
@@ -209,6 +208,11 @@
     }
     
     return self;
+}
+
+- (void)loadHTMLString:(NSString *)string baseURL:(NSURL *)baseURL
+{
+	[webView loadHTMLString:string baseURL:baseURL];
 }
 
 #pragma mark - View lifecycle
