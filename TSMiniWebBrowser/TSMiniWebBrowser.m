@@ -464,7 +464,7 @@
     
     // Show error alert
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Could not load page", nil)
-                                                    message:error.localizedDescription
+                                                    message:nil
                                                    delegate:self
                                           cancelButtonTitle:nil
                                           otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
