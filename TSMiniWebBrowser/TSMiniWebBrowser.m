@@ -463,12 +463,14 @@
 	if ([error code] == NSURLErrorCancelled) return;
     
     // Show error alert
+#ifndef RUN_KIF_TESTS
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Could not load page", nil)
                                                     message:error.localizedDescription
                                                    delegate:self
                                           cancelButtonTitle:nil
                                           otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
 	[alert show];
+#endif
 }
 
 @end
