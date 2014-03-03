@@ -212,7 +212,14 @@
 
 - (void)loadHTMLString:(NSString *)string baseURL:(NSURL *)baseURL
 {
-	[webView loadHTMLString:string baseURL:baseURL];
+	if (string == nil)
+	{
+		[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+	}
+	else
+	{
+		[webView loadHTMLString:string baseURL:baseURL];
+	}
 }
 
 #pragma mark - View lifecycle
