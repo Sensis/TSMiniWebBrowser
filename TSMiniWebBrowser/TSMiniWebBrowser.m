@@ -116,6 +116,12 @@
     } else {
         toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, viewSize.height-kToolBarHeight, viewSize.width, kToolBarHeight)];
     }
+	if ([toolBar respondsToSelector:@selector(barTintColor)])
+	{
+		toolBar.barTintColor = [UIColor whiteColor];
+	}
+
+	self.view.backgroundColor = [UIColor whiteColor];
     
     toolBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     toolBar.barStyle = barStyle;
