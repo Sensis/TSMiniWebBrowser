@@ -20,13 +20,15 @@
 
 - (void) presentModalWebViewController:(BOOL) animated {
     // Create webViewController here.
-    [self presentModalViewController:webViewController animated:animated];
-    self.modalWebViewPresented = YES;
+    [self presentViewController:webViewController animated:animated completion:^{
+        self.modalWebViewPresented = YES;
+    }];
 }
 
 - (void) dismissModalWebViewController:(BOOL) animated {
-    self.modalWebViewPresented = NO;
-    [self dismissModalViewControllerAnimated:animated];
+    [self dismissViewControllerAnimated:animated completion:^{
+        self.modalWebViewPresented = NO;
+    }];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

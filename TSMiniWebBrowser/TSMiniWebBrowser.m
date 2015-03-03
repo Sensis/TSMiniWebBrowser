@@ -70,12 +70,13 @@
 }
 
 -(void) dismissController {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        // Notify the delegate
+        if ([self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidDismiss)]) {
+            [delegate tsMiniWebBrowserDidDismiss];
+        }
+    }];
     
-    // Notify the delegate
-    if ([self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidDismiss)]) {
-        [delegate tsMiniWebBrowserDidDismiss];
-    }
 }
 
 //Added in the dealloc method to remove the webview delegate, because if you use this in a navigation controller
