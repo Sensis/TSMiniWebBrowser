@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CDE3F403-F74A-4731-9B37-B0419C34B899</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TSMiniWebBrowserDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4B881E802171FF93A4E11A0CB44BE0BD25EC57B4</key>
+		<string>https://github.com/Sensis/TSMiniWebBrowser.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TSMiniWebBrowserDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4B881E802171FF93A4E11A0CB44BE0BD25EC57B4</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Sensis/TSMiniWebBrowser.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4B881E802171FF93A4E11A0CB44BE0BD25EC57B4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4B881E802171FF93A4E11A0CB44BE0BD25EC57B4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TSMiniWebBrowser</string>
+		</dict>
+	</array>
+</dict>
+</plist>

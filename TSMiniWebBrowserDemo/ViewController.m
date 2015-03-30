@@ -88,8 +88,11 @@
     webBrowser.barStyle = UIBarStyleBlack;
     
     if (webBrowser.mode == TSMiniWebBrowserModeModal) {
-        webBrowser.modalDismissButtonTitle = @"Home";
-        [self presentModalViewController:webBrowser animated:YES];
+        
+        [self presentViewController:webBrowser animated:YES completion:^{
+            webBrowser.modalDismissButtonTitle = @"Home";
+        }];
+        
     } else if(webBrowser.mode == TSMiniWebBrowserModeNavigation) {
         [self.navigationController pushViewController:webBrowser animated:YES];
     }
