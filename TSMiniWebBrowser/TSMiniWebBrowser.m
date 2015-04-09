@@ -73,7 +73,7 @@
     [self dismissViewControllerAnimated:YES completion:^{
         // Notify the delegate
         if ([self.delegate respondsToSelector:@selector(tsMiniWebBrowserDidDismiss)]) {
-            [delegate tsMiniWebBrowserDidDismiss];
+            [self->delegate tsMiniWebBrowserDidDismiss];
         }
     }];
     
@@ -279,10 +279,9 @@
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotate;
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return YES;
 }
 
 /* Fix for landscape + zooming webview bug.
