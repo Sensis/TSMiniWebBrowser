@@ -86,6 +86,7 @@
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[webView setDelegate:nil];
 	[webView stopLoading];
+    [super dealloc];
 }
 
 #pragma mark - Init
