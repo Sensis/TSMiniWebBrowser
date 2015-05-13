@@ -28,6 +28,7 @@
 
 @interface TSMiniWebBrowser ()
 @property (nonatomic, retain) UIActionSheet* actionSheet;
+@property (nonatomic, retain) UIAlertController *alertController;
 @end
 
 @implementation TSMiniWebBrowser
@@ -392,6 +393,26 @@
 }
 
 
+- (void)showActionAlert:(UIBarButtonItem *)button
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[self actionSheetTitle] message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:[self actionSheetButtonTitle]  style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [[UIApplication sharedApplication] openURL:[self currentURL]];
+    }];
+    
+    [alertController addAction:alertAction];
+    
+    alertController.popoverPresentationController.barButtonItem = button;
+    
+    [self setAlertController:alertController];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        
+    }];
+    
+}
+
+
 #pragma mark - Actions
 
 - (void)backButtonTouchUp:(id)sender {
@@ -413,7 +434,13 @@
 }
 
 - (void)buttonActionTouchUp:(id)sender {
-    [self showActionSheet:sender];
+    
+    if ([UIAlertController class]) {
+        [self showActionAlert:sender];
+    } else {
+        [self showActionSheet:sender];
+    }
+
 }
 
 #pragma mark - Public Methods
@@ -481,5 +508,7 @@
 	[alert show];
 #endif
 }
+
+
 
 @end
