@@ -406,9 +406,7 @@
     
     [self setAlertController:alertController];
     
-    [self presentViewController:alertController animated:YES completion:^{
-        
-    }];
+    [self presentViewController:alertController animated:YES completion:nil];
     
 }
 
@@ -500,12 +498,29 @@
     
     // Show error alert
 #ifndef RUN_KIF_TESTS
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Could not load page", nil)
+    
+    NSString *title = NSLocalizedString(@"Could not load page", nil);
+    NSString *buttonTitle = NSLocalizedString(@"OK", nil);
+    
+    if ([UIAlertController class]) {
+    
+       	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertViewStyleDefault handler:nil];
+        
+        [alertController addAction:cancelAction];
+        
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+    } else {
+    
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:title
                                                     message:nil
                                                    delegate:self
                                           cancelButtonTitle:nil
-                                          otherButtonTitles:NSLocalizedString(@"OK", nil), nil] autorelease];
+                                          otherButtonTitles:buttonTitle, nil] autorelease];
 	[alert show];
+    }
 #endif
 }
 
