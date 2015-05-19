@@ -505,7 +505,7 @@
     if ([UIAlertController class]) {
     
        	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertViewStyleDefault handler:nil];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:nil];
         
         [alertController addAction:cancelAction];
         
